@@ -1,0 +1,436 @@
+﻿<Page x:Class="MadLibsApp.Views.MakeVideoGamePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Behaviors="using:Template10.Behaviors"
+      xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:MadLibsApp.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:vm="using:MadLibsApp.ViewModels" mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:MakeVideoGamePageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
+                <VisualState x:Name="VisualStateNarrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for narrow view  -->
+                        <Setter Target="stateTextBox.Text" Value="Narrow Visual State" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateNormal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for normal view  -->
+                        <Setter Target="stateTextBox.Text" Value="Normal Visual State" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateWide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for wide view  -->
+                        <Setter Target="stateTextBox.Text" Value="Wide Visual State" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <controls:PageHeader x:Name="pageHeader" RelativePanel.AlignLeftWithPanel="True"
+                                RelativePanel.AlignRightWithPanel="True"
+                                RelativePanel.AlignTopWithPanel="True" Text="Make Me A Video Game!">
+        </controls:PageHeader>
+
+        <!--  content  -->
+        <ScrollViewer Padding="12,8,0,0" 
+                      RelativePanel.AlignBottomWithPanel="True"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True"
+                      RelativePanel.Below="pageHeader"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField1" Width="250" Height="62" 
+                            Header="Adjective" Margin="16,12,16,0"
+                            Text="{Binding Value1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            TextWrapping="NoWrap" HorizontalAlignment="Left">
+                        <Interactivity:Interaction.Behaviors>
+                            <!--  focus on textbox when page loads  -->
+                            <Core:EventTriggerBehavior>
+                                <Behaviors:FocusAction />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </TextBox>
+                    <Button HorizontalAlignment="Left" Margin="8,40,16,0"
+                            Content="?" Background="SteelBlue" Foreground="White">
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <TextBlock Text="Describes a noun, e.g. 'big', 'quick', 'red'." />
+                                </StackPanel>
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="Click">
+                                <Behaviors:OpenFlyoutAction />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </Button>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField2" Width="250" Height="62" 
+                        Header="Adjective" Margin="16,12,16,0"
+                        Text="{Binding Value2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                    <Button HorizontalAlignment="Left" Margin="8,40,16,0"
+                            Content="?" Background="SteelBlue" Foreground="White">
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <TextBlock Text="Describes a noun, e.g. 'big', 'quick', 'red'." />
+                                </StackPanel>
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="Click">
+                                <Behaviors:OpenFlyoutAction />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </Button>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField3" Width="250" Height="62" 
+                        Header="A First Name" Margin="16,12,16,0"
+                        Text="{Binding Value3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField4" Width="250" Height="62" 
+                        Header="Verb: Past Tense" Margin="16,12,16,0"
+                        Text="{Binding Value4, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                    <Button HorizontalAlignment="Left" Margin="8,40,16,0"
+                            Content="?" Background="SteelBlue" Foreground="White">
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <TextBlock Text="Describes an action, e.g. 'ran', 'looked', 'felt'." />
+                                </StackPanel>
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="Click">
+                                <Behaviors:OpenFlyoutAction />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </Button>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField5" Width="250" Height="62" 
+                        Header="A First Name" Margin="16,12,16,0"
+                        Text="{Binding Value5, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField6" Width="250" Height="62" 
+                        Header="Adjective" Margin="16,12,16,0"
+                        Text="{Binding Value6, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                    <Button HorizontalAlignment="Left" Margin="8,40,16,0"
+                            Content="?" Background="SteelBlue" Foreground="White">
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <TextBlock Text="Describes a noun, e.g. 'big', 'quick', 'red'." />
+                                </StackPanel>
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="Click">
+                                <Behaviors:OpenFlyoutAction />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </Button>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField7" Width="250" Height="62" 
+                        Header="Adjective" Margin="16,12,16,0"
+                        Text="{Binding Value7, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                    <Button HorizontalAlignment="Left" Margin="8,40,16,0"
+                            Content="?" Background="SteelBlue" Foreground="White">
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <TextBlock Text="Describes a noun, e.g. 'big', 'quick', 'red'." />
+                                </StackPanel>
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="Click">
+                                <Behaviors:OpenFlyoutAction />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </Button>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField8" Width="250" Height="62" 
+                        Header="Noun: Plural" Margin="16,12,16,0"
+                        Text="{Binding Value8, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                    <Button HorizontalAlignment="Left" Margin="8,40,16,0"
+                            Content="?" Background="SteelBlue" Foreground="White">
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <TextBlock Text="Person, place, or thing, e.g. 'nurses', 'cats', 'parties'." />
+                                </StackPanel>
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="Click">
+                                <Behaviors:OpenFlyoutAction />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </Button>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField9" Width="250" Height="62" 
+                        Header="Large Animal" Margin="16,12,16,0"
+                        Text="{Binding Value9, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>                    
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField10" Width="250" Height="62" 
+                        Header="Small Animal" Margin="16,12,16,0"
+                        Text="{Binding Value10, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField11" Width="250" Height="62" 
+                        Header="A Girl's Name" Margin="16,12,16,0"
+                        Text="{Binding Value11, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>                   
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField12" Width="250" Height="62" 
+                        Header="Adjective" Margin="16,12,16,0"
+                        Text="{Binding Value12, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                    <Button HorizontalAlignment="Left" Margin="8,40,16,0"
+                            Content="?" Background="SteelBlue" Foreground="White">
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <TextBlock Text="Describes a noun, e.g. 'big', 'quick', 'red'." />
+                                </StackPanel>
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="Click">
+                                <Behaviors:OpenFlyoutAction />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField13" Width="250" Height="62" 
+                        Header="Noun: Plural" Margin="16,12,16,0"
+                        Text="{Binding Value13, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                    <Button HorizontalAlignment="Left" Margin="8,40,16,0"
+                            Content="?" Background="SteelBlue" Foreground="White">
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <TextBlock Text="Person, place, or thing, e.g. 'nurses', 'cats', 'parties'." />
+                                </StackPanel>
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="Click">
+                                <Behaviors:OpenFlyoutAction />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField14" Width="250" Height="62" 
+                        Header="Adjective" Margin="16,12,16,0"
+                        Text="{Binding Value14, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                    <Button HorizontalAlignment="Left" Margin="8,40,16,0"
+                            Content="?" Background="SteelBlue" Foreground="White">
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <TextBlock Text="Describes a noun, e.g. 'big', 'quick', 'red'." />
+                                </StackPanel>
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="Click">
+                                <Behaviors:OpenFlyoutAction />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField15" Width="250" Height="62" 
+                        Header="Noun: Plural" Margin="16,12,16,0"
+                        Text="{Binding Value15, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                    <Button HorizontalAlignment="Left" Margin="8,40,16,0"
+                            Content="?" Background="SteelBlue" Foreground="White">
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <TextBlock Text="Person, place, or thing, e.g. 'nurses', 'cats', 'parties'." />
+                                </StackPanel>
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="Click">
+                                <Behaviors:OpenFlyoutAction />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField16" Width="250" Height="62" 
+                        Header="Number: 1-50" Margin="16,12,16,0"
+                        Text="{Binding Value16, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField17" Width="250" Height="62" 
+                        Header="First Name" Margin="16,12,16,0"
+                        Text="{Binding Value17, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField18" Width="250" Height="62" 
+                        Header="Number" Margin="16,12,16,0"
+                        Text="{Binding Value18, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField19" Width="250" Height="62" 
+                        Header="Noun: Plural" Margin="16,12,16,0"
+                        Text="{Binding Value19, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                    <Button HorizontalAlignment="Left" Margin="8,40,16,0"
+                            Content="?" Background="SteelBlue" Foreground="White">
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <TextBlock Text="Person, place, or thing, e.g. 'nurses', 'cats', 'parties'." />
+                                </StackPanel>
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="Click">
+                                <Behaviors:OpenFlyoutAction />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField20" Width="250" Height="62" 
+                        Header="Number" Margin="16,12,16,0"
+                        Text="{Binding Value20, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="gameField21" Width="250" Height="62" 
+                        Header="Noun: Plural" Margin="16,12,16,0"
+                        Text="{Binding Value21, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="NoWrap">
+                    </TextBox>
+                    <Button HorizontalAlignment="Left" Margin="8,40,16,0"
+                            Content="?" Background="SteelBlue" Foreground="White">
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <TextBlock Text="Person, place, or thing, e.g. 'nurses', 'cats', 'parties'." />
+                                </StackPanel>
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="Click">
+                                <Behaviors:OpenFlyoutAction />
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </Button>
+                </StackPanel>
+
+                <Button x:Name="submitButton" Margin="16,16,16,16"
+                    Click="{x:Bind ViewModel.GotoDetailsPage}" Content="Read My Mad Lib">
+
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="Click">
+                            <Behaviors:ConditionalAction LeftValue="{Binding AllEntered}" Operator="IsFalse">
+                                <Behaviors:MessageDialogAction Content="All fields must contain values before continuing." 
+                                        Title="Missing Fields"
+                                        OkText="Okay"/>
+                            </Behaviors:ConditionalAction>
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
+                </Button>
+                
+            </StackPanel>
+        </ScrollViewer>
+    </RelativePanel>
+</Page>
